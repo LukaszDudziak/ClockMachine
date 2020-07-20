@@ -4,10 +4,75 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>ClockMachine</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
+
+    <h1>ClockMachine!</h1>
+    <div class="wrapper">
+        <!-- alarmclock section -->
+        <section class="alarm">
+            <h2>alarm clock</h2>
+            <!-- hour setting -->
+            <div class="inputs">
+                <input type="time" class="alarmSetting">
+            </div>
+            <!-- alarmclock buttons  -->
+            <div class="buttons">
+                <button class="set">set</button>
+                <button class="reset">reset</button>
+            </div>
+            <div class="info">Alarm's set at: <span class='alarmSet'>--:--</span></div>
+        </section>
+        <!-- countdowns section -->
+        <section class="counters">
+            <section class="countdown">
+                <h2>minute countdown</h2>
+                <!-- countdown inputs -->
+                <div class="inputs">
+                    <input type="text" class="hour">:
+                    <input type="text" class="minute">:
+                    <input type="text" class="seconds">
+                </div>
+                <div class="buttons">
+                    <button class="set">set</button>
+                    <button class="start">start</button>
+                    <button class="reset">reset</button>
+                </div>
+            </section>
+            <!-- count to date section -->
+            <section class="countdownToDate">
+                <h2>countdown</h2>
+                <div class="settings">
+                    <input type="date" class="date">
+                    <input type="time" class="hour">
+                </div>
+                <div class="buttons">
+                    <button class="start">start</button>
+                    <button class="reset">reset</button>
+                </div>
+                <div class="countdown">Time left: <span class="timeLeft"></span></div>
+            </section>
+        </section>
+        <!-- stopwatch section -->
+        <section class="stopwatch">
+            <h2>stopwatch</h2>
+            <div class="time">---</div>
+            <div class="buttons">
+                <button class="start">start</button>
+                <button class="split">split</button>
+                <button class="reset">reset</button>
+            </div>
+            <!-- splits list -->
+            <div>
+                <ul class="splits">
+                    <li></li>
+                </ul>
+            </div>
+        </section>
+    </div>
 
 </body>
 
