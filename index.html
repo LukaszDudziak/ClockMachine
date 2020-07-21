@@ -15,16 +15,18 @@
         <!-- alarmclock section -->
         <section class="alarm">
             <h2>alarm clock</h2>
+            <div class="currentTime">Current time: <span class="currentHour"></span>
+            </div>
             <!-- hour setting -->
             <div class="inputs">
-                <input type="time" class="alarmSetting">
+                <input type="time" class="alarmTime">
             </div>
             <!-- alarmclock buttons  -->
             <div class="buttons">
-                <button class="set">set</button>
-                <button class="reset">reset</button>
+                <button class="alarmSet">set</button>
+                <button class="alarmReset">reset</button>
             </div>
-            <div class="info">Alarm's set at: <span class='alarmSet'>--:--</span></div>
+            <div class="info">Alarm's set at: <span class='alarmSetting'>--:--</span></div>
         </section>
         <!-- countdowns section -->
         <section class="counters">
@@ -74,6 +76,7 @@
         </section>
     </div>
 
+    <script src="main.js"></script>
 </body>
 
 </html>

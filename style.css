@@ -46,6 +46,10 @@ button {
     flex-basis: 30%;
 }
 
+.alarm .currentTime {
+    margin: 0 0 5% 0;
+}
+
 .alarm input {
     width: 50%;
     line-height: 2rem;
@@ -55,6 +59,10 @@ button {
 
 .alarm .info {
     font-size: 1.5rem;
+}
+
+.ring {
+    background-color: red;
 }
 
 .counters {
