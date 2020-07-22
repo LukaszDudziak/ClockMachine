@@ -120,3 +120,42 @@ countdownSet.addEventListener('click', setCountdown);
 countdownReset.addEventListener('click', resetCountdown);
 
 //countdown To date section
+const countToDateSection = document.querySelector('.countdownToDate');
+const countToDateInput = document.querySelector('.countToDate');
+const countToDateTime = document.querySelector('.countToDateHour');
+const countToDateStart = document.querySelector('.countToDateStart');
+const countToDateeset = document.querySelector('countToDateReset');
+const timeLeft = document.querySelector('.timeLeft');
+let countToDateInterval;
+
+
+const checkInputs = (todayTime, countToMiliseconds) => {
+
+    //check if all inputs are set and if set date is not from past
+    if (countToDateInput.value == "" || countToDateTime.value == "" || todayTime > countToMiliseconds) {
+        return alert('Something gone wrong with your inputs')
+    }
+
+}
+//interval not working
+const dateCounter = (timeGap) => {
+    timeGap -= 1000;
+    console.log(timeGap)
+}
+
+const countToDate = () => {
+    //creating current date
+    today = new Date();
+    //creating number values of current and input dates 
+    const todayTime = today.getTime();
+    const countToMiliseconds = countToDateInput.valueAsDate.getTime() + countToDateTime.valueAsNumber;
+    let timeGap = countToMiliseconds - todayTime;
+    //checking inputs
+    checkInputs(todayTime, countToMiliseconds);
+    //counting with interval usage
+    countToDateInterval = setInterval(dateCounter(timeGap), 1000);
+    //rewriting span with time left
+
+}
+
+countToDateStart.addEventListener('click', countToDate);
