@@ -15,6 +15,7 @@
         <!-- alarmclock section -->
         <section class="alarm">
             <h2>alarm clock</h2>
+            <!-- simple clock -->
             <div class="currentTime">Current time: <span class="currentHour"></span>
             </div>
             <!-- hour setting -->
@@ -26,6 +27,7 @@
                 <button class="alarmSet">set</button>
                 <button class="alarmReset">reset</button>
             </div>
+            <!-- information about set alarm  -->
             <div class="info">Alarm's set at: <span class='alarmSetting'>--:--</span></div>
         </section>
         <!-- countdowns section -->
@@ -34,19 +36,19 @@
                 <h2>minute countdown</h2>
                 <!-- countdown inputs -->
                 <div class="inputs">
-                    <input type="text" class="hour">:
-                    <input type="text" class="minute">:
-                    <input type="text" class="seconds">
+                    <input type="text" class="countdownHour" value="00">:
+                    <input type="text" class="countdownMinute" value="00">:
+                    <input type="text" class="countdownSeconds" value="00">
                 </div>
                 <div class="buttons">
-                    <button class="set">set</button>
-                    <button class="start">start</button>
-                    <button class="reset">reset</button>
+                    <button class="countdownSet">set</button>
+                    <button class="countdownStart">start</button>
+                    <button class="countdownReset">reset</button>
                 </div>
             </section>
             <!-- count to date section -->
             <section class="countdownToDate">
-                <h2>countdown</h2>
+                <h2>countdown to date</h2>
                 <div class="settings">
                     <input type="date" class="date">
                     <input type="time" class="hour">
