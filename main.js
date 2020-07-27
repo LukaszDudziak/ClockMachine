@@ -69,7 +69,7 @@ const checkMinutesSeconds = (time) => {
 const countdown = () => {
 
     //special effect for last 10 seconds 
-    if (countdownSeconds.value < 10 && countdownHour.value == 0 && countdownMinute.value == 0) {
+    if (countdownSeconds.value <= 10 && countdownHour.value == 0 && countdownMinute.value == 0) {
         countdownSection.classList.toggle('ring');
     }
 
@@ -138,22 +138,23 @@ const checkInputs = (todayTime, countToMiliseconds) => {
 
 }
 //interval not working
-const dateCounter = (timeGap) => {
-    timeGap -= 1000;
-    console.log(timeGap)
+const dateCounter = () => {
+    //creating current date
+    today = new Date();
+    //creating current date must be done in interval, because you want new date info in every second; in optimalisation ver. i must consider if putting date into interval isn't better idea, than creating new object every second...by writing it i'm kinda sure, that it is.
+
+    console.log(timeDif)
 }
 
 const countToDate = () => {
-    //creating current date
-    today = new Date();
+    let today = new Date();
     //creating number values of current and input dates 
     const todayTime = today.getTime();
     const countToMiliseconds = countToDateInput.valueAsDate.getTime() + countToDateTime.valueAsNumber;
-    let timeGap = countToMiliseconds - todayTime;
     //checking inputs
     checkInputs(todayTime, countToMiliseconds);
     //counting with interval usage
-    countToDateInterval = setInterval(dateCounter(timeGap), 1000);
+    countToDateInterval = setInterval(dateCounter(), 1000);
     //rewriting span with time left
 
 }
