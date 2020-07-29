@@ -124,9 +124,11 @@ const countToDateSection = document.querySelector('.countdownToDate');
 const countToDateInput = document.querySelector('.countToDate');
 const countToDateTime = document.querySelector('.countToDateHour');
 const countToDateStart = document.querySelector('.countToDateStart');
-const countToDateeset = document.querySelector('countToDateReset');
+const countToDateReset = document.querySelector('.countToDateReset');
 const timeLeft = document.querySelector('.timeLeft');
 let countToDateInterval;
+let countToMiliseconds;
+let countingInProgress;
 
 
 const checkInputs = (todayTime, countToMiliseconds) => {
@@ -137,26 +139,116 @@ const checkInputs = (todayTime, countToMiliseconds) => {
     }
 
 }
-//interval not working
+//main function
 const dateCounter = () => {
     //creating current date
-    today = new Date();
+    let currTimeInMilis = new Date().getTime();
     //creating current date must be done in interval, because you want new date info in every second; in optimalisation ver. i must consider if putting date into interval isn't better idea, than creating new object every second...by writing it i'm kinda sure, that it is.
 
-    console.log(timeDif)
+    //defining timeGap variable and others, for html span
+    let timeGap = (countToMiliseconds - currTimeInMilis) / 1000;
+    let daysToDate = Math.floor(timeGap / (60 * 60 * 24));
+    let hoursToDate = Math.floor((timeGap % (60 * 60 * 24)) / (60 * 60));
+    let minutesToDate = Math.floor((timeGap % (60 * 60)) / 60);
+    let secondsToDate = Math.floor(timeGap % 60);
+    console.log(Math.floor(timeGap))
+    //final moment :)
+    if (Math.floor(timeGap <= 0)) {
+        resetDateSettings();
+        alert("The time is now!")
+        return;
+    }
+
+    //rewriting span with time left
+    timeLeft.innerHTML = `${daysToDate} days ${hoursToDate} hours ${minutesToDate} minutes and ${secondsToDate} seconds to your date.`
 }
 
 const countToDate = () => {
     let today = new Date();
+    //blockade for double use without reset
+    if (countingInProgress) {
+        alert('Reset first!')
+        return;
+    }
+    countingInProgress = true;
     //creating number values of current and input dates 
     const todayTime = today.getTime();
-    const countToMiliseconds = countToDateInput.valueAsDate.getTime() + countToDateTime.valueAsNumber;
+    countToMiliseconds = countToDateInput.valueAsDate.getTime() + countToDateTime.valueAsNumber;
     //checking inputs
     checkInputs(todayTime, countToMiliseconds);
     //counting with interval usage
-    countToDateInterval = setInterval(dateCounter(), 1000);
-    //rewriting span with time left
-
+    countToDateInterval = setInterval(dateCounter, 1000);
+}
+//reset button function 
+const resetDateSettings = () => {
+    clearInterval(countToDateInterval);
+    countToDateInput.value = null;
+    countToDateTime.value = null;
+    timeLeft.innerHTML = "";
+    countingInProgress = false;
 }
 
 countToDateStart.addEventListener('click', countToDate);
+countToDateReset.addEventListener('click', resetDateSettings);
+
+//stopwatch section
+const stopwatchTime = document.querySelector('.stopwatch .time');
+const stopwatchStartStop = document.querySelector('.stopwatch .start');
+const stopwatchLap = document.querySelector('.stopwatch .lap');
+const stopwatchReset = document.querySelector('.stopwatch .reset');
+const laps = document.querySelector('.stopwatch .laps');
+let stopwatchInterval;
+let stopwatchProgress;
+let stopwatchDisplay;
+let startFlag;
+//for working start/stop function
+let stopwatchMemory = 0;
+
+
+const timeProgress = () => {
+    //time progress
+    stopwatchProgress++;
+    stopwatchDisplay = ((stopwatchProgress) / 100).toFixed(2)
+    //display time progress 
+    stopwatchTime.innerHTML = `${stopwatchDisplay} s`;
+}
+
+//main start/stop button function
+const startStop = () => {
+    if (startFlag == 1) {
+        stopwatchStartStop.innerHTML = "START";
+        clearInterval(stopwatchInterval);
+        stopwatchMemory = stopwatchProgress;
+        startFlag = 0;
+    } else {
+        //variable for progressing time 
+        stopwatchProgress = 0 + stopwatchMemory;
+        stopwatchInterval = setInterval(timeProgress, 10);
+        //changing button from Start to Stop and setting flag 
+        stopwatchStartStop.innerHTML = "STOP";
+        startFlag = 1;
+    }
+}
+
+//laps function...function
+const catchLapTime = () => {
+    let lapTimeElement = document.createElement("li");
+    //using stopwatchDisplay to show laptime
+    lapTimeElement.innerHTML = `${laps.childElementCount+1} lap time: ${stopwatchDisplay}`;
+    laps.appendChild(lapTimeElement);
+}
+
+//stopwatch reset function
+const resetStopwatch = () => {
+    stopwatchStartStop.innerHTML = "START";
+    clearInterval(stopwatchInterval);
+    stopwatchTime.innerHTML = '---'
+    laps.innerHTML = '';
+    let stopwatchMemory = 0;
+    startFlag = 0;
+}
+
+//buttons actions
+stopwatchStartStop.addEventListener('click', startStop);
+stopwatchLap.addEventListener('click', catchLapTime);
+stopwatchReset.addEventListener('click', resetStopwatch);
